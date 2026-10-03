@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Language Lingo by Nova Cloud develops modern, practical language-course web applications for learners around the world." />
+  <title>Language Lingo | Language Learning by Nova Cloud</title>
+  <style>
+    :root {
+      --bg: #f8fbff;
+      --surface: #ffffff;
+      --surface-soft: #eef5ff;
+      --text: #172033;
+      --muted: #667085;
+      --primary: #2457d6;
+      --primary-dark: #163da7;
+      --accent: #f4c95d;
+      --border: #dfe7f3;
+      --shadow: 0 20px 50px rgba(36, 87, 214, 0.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248, 251, 255, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(223, 231, 243, 0.85);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.1rem;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), #6f93f7);
+      color: white;
+      box-shadow: 0 10px 24px rgba(36, 87, 214, .22);
+    }
+
+    .brand-mark svg { width: 23px; height: 23px; }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      font-size: .95rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-cta {
+      color: white !important;
+      background: var(--primary);
+      padding: 10px 16px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      padding: 86px 0 70px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-size: .84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      line-height: .98;
+      letter-spacing: -0.065em;
+      margin: 20px 0 22px;
+      max-width: 760px;
+    }
+
+    h1 span { color: var(--primary); }
+
+    .hero-copy {
+      font-size: 1.16rem;
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 13px;
+      font-weight: 800;
+      transition: .2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--primary);
+      box-shadow: 0 14px 30px rgba(36, 87, 214, .2);
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--primary-dark); }
+
+    .btn-secondary {
+      background: white;
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-secondary:hover { border-color: #b8c8e6; transform: translateY(-2px); }
+
+    .microcopy { color: var(--muted); font-size: .9rem; }
+
+    .app-card-wrap {
+      position: relative;
+      min-height: 510px;
+      display: grid;
+      place-items: center;
+    }
+
+    .blob {
+      position: absolute;
+      width: 430px;
+      height: 430px;
+      border-radius: 44% 56% 58% 42% / 43% 38% 62% 57%;
+      background: linear-gradient(145deg, #dce8ff, #fff4ce);
+      filter: blur(.2px);
+      transform: rotate(-8deg);
+    }
+
+    .mockup {
+      position: relative;
+      width: min(420px, 92%);
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      transform: rotate(2deg);
+    }
+
+    .mockup-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .mini-brand { font-weight: 900; letter-spacing: -.03em; }
+    .dots { display: flex; gap: 6px; }
+    .dots span { width: 8px; height: 8px; border-radius: 50%; background: #d9e2ef; }
+
+    .course-title {
+      background: linear-gradient(135deg, #1f4fc4, #6d91f2);
+      color: white;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 14px;
+    }
+
+    .course-title small { opacity: .8; font-weight: 700; }
+    .course-title h3 { margin: 8px 0 0; font-size: 1.7rem; line-height: 1.1; }
+
+    .lesson-list { display: grid; gap: 10px; }
+    .lesson {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #f8faff;
+      border: 1px solid #edf1f8;
+      border-radius: 14px;
+    }
+
+    .lesson-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: #eaf0ff;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .lesson strong { display: block; font-size: .95rem; }
+    .lesson small { color: var(--muted); }
+    .check { color: #1d9d6b; font-weight: 900; }
+
+    section { padding: 82px 0; }
+    .section-kicker { color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+    .section-title { font-size: clamp(2.1rem, 4vw, 3.4rem); line-height: 1.05; letter-spacing: -.05em; margin: 10px 0 16px; }
+    .section-copy { color: var(--muted); max-width: 700px; font-size: 1.05rem; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 8px 26px rgba(25, 52, 109, 0.05);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: var(--surface-soft);
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 900;
+    }
+
+    .card h3 { margin: 0 0 8px; font-size: 1.2rem; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .featured {
+      background: #132653;
+      color: white;
+    }
+
+    .featured .section-kicker { color: #9db8ff; }
+    .featured .section-copy { color: #c9d3e8; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .pill-list { display: grid; gap: 13px; margin-top: 30px; }
+    .pill {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+
+    .pill b { color: var(--accent); }
+
+    .course-showcase {
+      background: white;
+      color: var(--text);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.2);
+    }
+
+    .course-showcase h3 { margin-top: 0; }
+    .topic-tags { display: flex; flex-wrap: wrap; gap: 9px; }
+    .topic-tags span {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: #f1f5fc;
+      color: #40506e;
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 14px;
+      margin-top: 38px;
+    }
+
+    .step {
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+
+    .step-num {
+      font-size: .78rem;
+      color: var(--primary);
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .step h3 { margin: 10px 0 8px; }
+    .step p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .about-box {
+      background: linear-gradient(135deg, #ffffff, #edf4ff);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .about-box h2 { margin: 0 0 10px; font-size: clamp(2rem,4vw,3rem); letter-spacing: -.05em; }
+    .about-box p { margin: 0; color: var(--muted); max-width: 720px; }
+
+    .nova-badge {
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: #121a2b;
+      color: white;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .cta {
+      padding-top: 36px;
+      padding-bottom: 90px;
+    }
+
+    .cta-box {
+      text-align: center;
+      background: linear-gradient(135deg, #2457d6 0%, #537cea 70%, #6b8cf0 100%);
+      color: white;
+      border-radius: 32px;
+      padding: 58px 28px;
+      box-shadow: 0 24px 60px rgba(36,87,214,.25);
+    }
+
+    .cta-box h2 { margin: 0 0 12px; font-size: clamp(2.2rem,5vw,3.5rem); letter-spacing: -.05em; line-height: 1.05; }
+    .cta-box p { margin: 0 auto 26px; max-width: 650px; color: rgba(255,255,255,.85); }
+    .cta-box .btn-secondary { border-color: rgba(255,255,255,.3); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .feature-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 58px; }
+      .app-card-wrap { min-height: 450px; }
+      .cards { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .about-box { grid-template-columns: 1fr; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .steps { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .about-box { padding: 28px; }
+      .mockup { transform: none; }
+      .blob { width: 330px; height: 330px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5z"/>
+            <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5A2.5 2.5 0 0 1 20 21.5z"/>
+          </svg>
+        </span>
+        <span>Language Lingo</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#courses">Courses</a>
+        <a href="#process">How it works</a>
+        <a class="nav-cta" href="#contact">Explore</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Language learning, reimagined</div>
+          <h1>Learn languages through <span>real life.</span></h1>
+          <p class="hero-copy">
+            Language Lingo creates practical, modern language-course web applications built around the conversations people actually use — from greetings and cafés to family, travel, culture, and everyday life.
+          </p>
+          <div class="hero-actions">
+            <a href="#courses" class="btn btn-primary">Explore our courses →</a>
+            <a href="#about" class="btn btn-secondary">About Language Lingo</a>
+          </div>
+          <div class="microcopy">Developed and operated by <strong>Nova Cloud</strong>.</div>
+        </div>
+
+        <div class="app-card-wrap" aria-label="Language Lingo course preview">
+          <div class="blob"></div>
+          <div class="mockup">
+            <div class="mockup-top">
+              <div class="mini-brand">Language Lingo</div>
+              <div class="dots"><span></span><span></span><span></span></div>
+            </div>
+            <div class="course-title">
+              <small>Featured course</small>
+              <h3>Bosnian for Everyday Life 🇧🇦</h3>
+            </div>
+            <div class="lesson-list">
+              <div class="lesson"><div class="lesson-num">01</div><div><strong>Greetings</strong><small>Learn the essentials</small></div><div class="check">✓</div></div>
+              <div class="lesson"><div class="lesson-num">02</div><div><strong>At the Café</strong><small>Order with confidence</small></div><div class="check">✓</div></div>
+              <div class="lesson"><div class="lesson-num">03</div><div><strong>Family & Relatives</strong><small>Talk with loved ones</small></div><div>→</div></div>
+              <div class="lesson"><div class="lesson-num">04</div><div><strong>Travel & Directions</strong><small>Move around naturally</small></div><div>→</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-kicker">What we do</div>
+        <h2 class="section-title">Language apps designed to feel useful from day one.</h2>
+        <p class="section-copy">We build focused language courses that prioritize practical vocabulary, everyday conversations, quizzes, repetition, and culture — without overwhelming learners with unnecessary complexity.</p>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">A</div>
+            <h3>Practical lessons</h3>
+            <p>Courses are organized around real situations such as introductions, restaurants, travel, family, shopping, work, and social conversations.</p>
+          </article>
+          <article class="card">
+            <div class="icon">✓</div>
+            <h3>Interactive practice</h3>
+            <p>Quizzes and bite-sized activities help learners test what they know and build confidence as they progress.</p>
+          </article>
+          <article class="card">
+            <div class="icon">◎</div>
+            <h3>Culture included</h3>
+            <p>Language is more than vocabulary. Our courses highlight expressions, customs, and context that make communication feel natural.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" id="courses">
+      <div class="container feature-grid">
+        <div>
+          <div class="section-kicker">Featured course</div>
+          <h2 class="section-title">Bosnian for English speakers.</h2>
+          <p class="section-copy">Our Bosnian course is designed for beginners, travelers, heritage learners, and members of the Bosnian diaspora who want to reconnect with the language in a practical way.</p>
+          <div class="pill-list">
+            <div class="pill"><b>60+</b><span>real-world learning topics</span></div>
+            <div class="pill"><b>900+</b><span>quiz questions across the course</span></div>
+            <div class="pill"><b>Everyday</b><span>phrases, vocabulary, culture, and practical scenarios</span></div>
+          </div>
+        </div>
+        <div class="course-showcase">
+          <h3>What you can learn</h3>
+          <div class="topic-tags">
+            <span>Greetings</span><span>Family</span><span>At the Café</span><span>Shopping</span><span>Directions</span><span>Small Talk</span><span>Food</span><span>Restaurants</span><span>Travel</span><span>Airport</span><span>Weather</span><span>Work</span><span>Health</span><span>Emergencies</span><span>Weddings</span><span>Slang</span><span>Texting</span><span>Dating</span><span>Culture</span><span>Common Phrases</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-kicker">How it works</div>
+        <h2 class="section-title">Simple courses. Clear progress.</h2>
+        <p class="section-copy">Language Lingo keeps the learning process straightforward so users can spend less time figuring out the platform and more time practicing the language.</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-num">Step 01</div><h3>Choose a topic</h3><p>Start with practical subjects that match how you want to use the language.</p></div>
+          <div class="step"><div class="step-num">Step 02</div><h3>Learn the material</h3><p>Review useful words, phrases, and examples in an easy-to-follow format.</p></div>
+          <div class="step"><div class="step-num">Step 03</div><h3>Take the quiz</h3><p>Use interactive questions to reinforce what you just learned.</p></div>
+          <div class="step"><div class="step-num">Step 04</div><h3>Keep progressing</h3><p>Move through more advanced topics and build confidence over time.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="about-box">
+          <div>
+            <h2>Built by Nova Cloud.</h2>
+            <p>Language Lingo is operated by Nova Cloud, a digital development brand focused on building clean, accessible web experiences and practical online products. Our goal is to make language learning easier to access, easier to understand, and more enjoyable to use.</p>
+          </div>
+          <div class="nova-badge">NOVA CLOUD</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Learn a language that connects you to people.</h2>
+          <p>Language Lingo is building practical language courses for learners around the world, starting with Bosnian.</p>
+          <a class="btn btn-secondary" href="#top">Back to top ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Language Lingo. All rights reserved.</div>
+      <div>Operated by Nova Cloud.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
